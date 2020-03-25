@@ -7,36 +7,24 @@ Okay listen up team! Read these instructions very carefully:
 
 # The file Structure for CodeHub is as follows:
 
-```├── app
+``` 
+.
+├── app
 │   ├── blueprint_imports.txt
 │   ├── config.py
 │   ├── database.db
 │   ├── errors
 │   │   ├── handlers.py
-│   │   ├── __init__.py
-│   │   └── __pycache__
-│   │       ├── handlers.cpython-38.pyc
-│   │       └── __init__.cpython-38.pyc
+│   │   └── __init__.py
 │   ├── __init__.py
 │   ├── main
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-38.pyc
-│   │   │   └── routes.cpython-38.pyc
 │   │   └── routes.py
 │   ├── models.py
 │   ├── posts
 │   │   ├── forms.py
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── forms.cpython-38.pyc
-│   │   │   ├── __init__.cpython-38.pyc
-│   │   │   └── routes.cpython-38.pyc
 │   │   └── routes.py
-│   ├── __pycache__
-│   │   ├── config.cpython-38.pyc
-│   │   ├── __init__.cpython-38.pyc
-│   │   └── models.cpython-38.pyc
 │   ├── static
 │   │   ├── main.css
 │   │   └── profile_images
@@ -69,11 +57,6 @@ Okay listen up team! Read these instructions very carefully:
 │   └── users
 │       ├── forms.py
 │       ├── __init__.py
-│       ├── __pycache__
-│       │   ├── forms.cpython-38.pyc
-│       │   ├── __init__.cpython-38.pyc
-│       │   ├── routes.cpython-38.pyc
-│       │   └── utils.cpython-38.pyc
 │       ├── routes.py
 │       └── utils.py
 ├── README.md
@@ -87,13 +70,6 @@ To clone this repository enter the following command:
     $ git clone https://github.com/rehman000/CodeHub/
 
 # Installing Dependencies: 
-
-Now that we are in the Python Virtual Enviornment we can install all the necessary dependencies by entering the following command:
-
-    $ pip3 install flask flask-sqlalchemy
-
-Note that this is temporary if I end up installing more Python modules, I will place them all in a requirements.txt file and you could install all the dependencies inisde the virtual enviornment by entering the following command: 
-(This has not yet happened, but it's good to be future proof)
 
     $ pip3 install -r requirements.txt
     
