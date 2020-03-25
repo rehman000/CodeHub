@@ -7,7 +7,8 @@ Okay listen up team! Read these instructions very carefully:
 
 # The file Structure for CodeHub is as follows:
 
-```├── app
+``` 
+├── app
 │   ├── blueprint_imports.txt
 │   ├── config.py
 │   ├── database.db
