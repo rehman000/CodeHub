@@ -2,7 +2,6 @@
 
 The file Structure for CodeHub is as follows:
 
-Some basic Git commands are:
 ```├── app
 │   ├── blueprint_imports.txt
 │   ├── config.py
