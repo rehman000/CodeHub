@@ -12,7 +12,6 @@
 
 #       ヽ( ಠ益ಠ )ﾉ   ヽ( ಠ益ಠ )ﾉ  ヽ( ಠ益ಠ )ﾉ   ヽ( ಠ益ಠ )ﾉ   ヽ( ಠ益ಠ )ﾉ   ヽ( ಠ益ಠ )ﾉ
 
-
 #------------------------------------------------------------------------------
 # Notes on Application Structure History and GOALS:
 #------------------------------------------------------------------------------
@@ -50,15 +49,32 @@
 │   ├── blueprint_imports.txt
 │   ├── config.py
 │   ├── database.db
+│   ├── errors
+│   │   ├── handlers.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── handlers.cpython-38.pyc
+│   │       └── __init__.cpython-38.pyc
 │   ├── __init__.py
 │   ├── main
 │   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-38.pyc
+│   │   │   └── routes.cpython-38.pyc
 │   │   └── routes.py
 │   ├── models.py
 │   ├── posts
 │   │   ├── forms.py
 │   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── forms.cpython-38.pyc
+│   │   │   ├── __init__.cpython-38.pyc
+│   │   │   └── routes.cpython-38.pyc
 │   │   └── routes.py
+│   ├── __pycache__
+│   │   ├── config.cpython-38.pyc
+│   │   ├── __init__.cpython-38.pyc
+│   │   └── models.cpython-38.pyc
 │   ├── static
 │   │   ├── main.css
 │   │   └── profile_images
@@ -76,6 +92,10 @@
 │   │   ├── about.html
 │   │   ├── account.html
 │   │   ├── create_post.html
+│   │   ├── errors
+│   │   │   ├── 403.html
+│   │   │   ├── 404.html
+│   │   │   └── 500.html
 │   │   ├── home.html
 │   │   ├── login.html
 │   │   ├── post.html
@@ -87,6 +107,11 @@
 │   └── users
 │       ├── forms.py
 │       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── forms.cpython-38.pyc
+│       │   ├── __init__.cpython-38.pyc
+│       │   ├── routes.cpython-38.pyc
+│       │   └── utils.cpython-38.pyc
 │       ├── routes.py
 │       └── utils.py
 ├── README.md
