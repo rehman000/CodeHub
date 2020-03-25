@@ -90,11 +90,6 @@ To clone this repository enter the following command:
 
 Now that we are in the Python Virtual Enviornment we can install all the necessary dependencies by entering the following command:
 
-    $ pip3 install flask flask-sqlalchemy
-
-Note that this is temporary if I end up installing more Python modules, I will place them all in a requirements.txt file and you could install all the dependencies inisde the virtual enviornment by entering the following command: 
-(This has not yet happened, but it's good to be future proof)
-
     $ pip3 install -r requirements.txt
     
 # Running the Application:
