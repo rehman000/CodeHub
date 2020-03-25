@@ -79,3 +79,4 @@ Now that we have everything set up properly to run the application enter the fol
 
     $ python3 run.py
 
+The application will be running on:     http://localhost:5000/ 
