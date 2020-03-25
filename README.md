@@ -8,36 +8,23 @@ Okay listen up team! Read these instructions very carefully:
 # The file Structure for CodeHub is as follows:
 
 ``` 
+.
 ├── app
 │   ├── blueprint_imports.txt
 │   ├── config.py
 │   ├── database.db
 │   ├── errors
 │   │   ├── handlers.py
-│   │   ├── __init__.py
-│   │   └── __pycache__
-│   │       ├── handlers.cpython-38.pyc
-│   │       └── __init__.cpython-38.pyc
+│   │   └── __init__.py
 │   ├── __init__.py
 │   ├── main
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-38.pyc
-│   │   │   └── routes.cpython-38.pyc
 │   │   └── routes.py
 │   ├── models.py
 │   ├── posts
 │   │   ├── forms.py
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── forms.cpython-38.pyc
-│   │   │   ├── __init__.cpython-38.pyc
-│   │   │   └── routes.cpython-38.pyc
 │   │   └── routes.py
-│   ├── __pycache__
-│   │   ├── config.cpython-38.pyc
-│   │   ├── __init__.cpython-38.pyc
-│   │   └── models.cpython-38.pyc
 │   ├── static
 │   │   ├── main.css
 │   │   └── profile_images
@@ -70,11 +57,6 @@ Okay listen up team! Read these instructions very carefully:
 │   └── users
 │       ├── forms.py
 │       ├── __init__.py
-│       ├── __pycache__
-│       │   ├── forms.cpython-38.pyc
-│       │   ├── __init__.cpython-38.pyc
-│       │   ├── routes.cpython-38.pyc
-│       │   └── utils.cpython-38.pyc
 │       ├── routes.py
 │       └── utils.py
 ├── README.md
