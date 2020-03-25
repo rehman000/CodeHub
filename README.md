@@ -2,7 +2,7 @@
 
 The file Structure for CodeHub is as follows:
 
-├── app
+```├── app
 │   ├── blueprint_imports.txt
 │   ├── config.py
 │   ├── database.db
@@ -73,3 +73,5 @@ The file Structure for CodeHub is as follows:
 │       └── utils.py
 ├── README.md
 └── run.py
+
+```
