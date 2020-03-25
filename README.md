@@ -1,6 +1,11 @@
 # CodeHub
 
-The file Structure for CodeHub is as follows:
+# CSC-32200-Software-Engineering
+CSC-32200-Software-Engineering Spring 2020 @ The City College of New York 
+
+Okay listen up team! Read these instructions very carefully:
+
+# The file Structure for CodeHub is as follows:
 
 ```├── app
 │   ├── blueprint_imports.txt
@@ -75,3 +80,26 @@ The file Structure for CodeHub is as follows:
 └── run.py
 
 ```
+
+# Development Enviornment Set up:
+To clone this repository enter the following command: 
+
+    $ git clone https://github.com/rehman000/CodeHub/
+
+# Installing Dependencies: 
+
+Now that we are in the Python Virtual Enviornment we can install all the necessary dependencies by entering the following command:
+
+    $ pip3 install flask flask-sqlalchemy
+
+Note that this is temporary if I end up installing more Python modules, I will place them all in a requirements.txt file and you could install all the dependencies inisde the virtual enviornment by entering the following command: 
+(This has not yet happened, but it's good to be future proof)
+
+    $ pip3 install -r requirements.txt
+    
+# Running the Application:
+
+Now that we have everything set up properly to run the application enter the following command:
+
+    $ python3 run.py
+
