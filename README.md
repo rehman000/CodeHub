@@ -88,8 +88,6 @@ To clone this repository enter the following command:
 
 # Installing Dependencies: 
 
-Now that we are in the Python Virtual Enviornment we can install all the necessary dependencies by entering the following command:
-
     $ pip3 install -r requirements.txt
     
 # Running the Application:
