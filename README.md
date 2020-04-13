@@ -69,6 +69,12 @@ To clone this repository enter the following command:
 
     $ git clone https://github.com/rehman000/CodeHub/
 
+#### Information about the environment variables
+* SQLALCHEMY_DATABASE_URI represents the url to an SQL database
+* SECRET_KEY represents your secret key
+* MAIL_USERNAME represents an email address
+* MAIL_PASSWORD represents an email password
+
 # Installing Dependencies: 
 
     $ pip3 install -r requirements.txt
