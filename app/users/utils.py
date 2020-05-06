@@ -54,5 +54,10 @@ def reputationUp(user):
 def reputationDown(user):
     user.reputation -= 1                # Helper Function to decrement A users reputation Score!
     db.session.commit()                 # commit changes into DB
+
 # def promote_user():
 
+
+def set_reputation(user):
+    user.reputation = -12               # Make the reputation Negative so that I can test feature # 6 from the spec sheet!
+    db.session.commit()                 # commit changes into DB

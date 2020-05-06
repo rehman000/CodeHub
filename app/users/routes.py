@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Post
 from app.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm)
-from app.users.utils import save_picture, send_reset_email, blacklist
+from app.users.utils import save_picture, send_reset_email, blacklist, set_reputation
 
 
 users = Blueprint('users', __name__)                            # Blueprints 
@@ -107,6 +107,7 @@ def user_posts(username):
                                                                             # We are filtering the query by date posted, ensuring it's still paginated, but now we've added another filter to look for posts made from a spedific user. 
     return render_template('user_posts.html', posts=posts, user=user)       # Redirect to user_posts.html
 
+
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
@@ -136,10 +137,19 @@ def reset_token(token):
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
-    
+
+
 @users.route("/bl/<string:username>")
+@login_required
 def bl(username):
     user = User.query.filter_by(username=username).first_or_404()
     blacklist(user)
-    flash('User has been blacklisted! He will have one last chance to login, after that he will not be able to login ever again!', 'danger')
+    flash('User has been blacklisted! User will have one last chance to login, after that you will not be able to login again!', 'danger')
+    return redirect(url_for('main.home'))                                                   # Redirect to Home page
+
+@users.route('/user/test/<string:username>') 
+def test(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    set_reputation(user)
+    flash('Your reputation has become negative! You are in a lot of trouble ... !', 'danger')
     return redirect(url_for('main.home'))                                                   # Redirect to Home page
