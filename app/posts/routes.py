@@ -3,12 +3,16 @@ from flask_login import current_user, login_required
 from app import db
 from app.models import Post
 from app.posts.forms import PostForm
-
-
+from flask import Flask
+from flask_censor import Censor # This is based on profanity filter ... 
 
 posts = Blueprint('posts', __name__)
 
 # CRUD Methods: 
+
+censor = Censor()
+censor.set_censorchars('*')
+
 
 
 @posts.route('/post/new', methods=['GET', 'POST'])
@@ -16,8 +20,12 @@ posts = Blueprint('posts', __name__)
 def new_post(): 
     form = PostForm()                                                                               # Create instance of the  PostForm()
 
-    if form.validate_on_submit():                                                                   # If user input is valid (i.e) no null characters, etc
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)          # Create instance of Post() and pass in user input given to the form
+    if form.validate_on_submit():       # If user input is valid (i.e) no null characters, etc
+
+        title = censor.censor(form.title.data)
+        content = censor.censor(form.content.data)
+
+        post = Post(title=title, content=content, author=current_user)          # Create instance of Post() and pass in user input given to the form
         db.session.add(post)                                                                        # Mark this 'post' to be added to the database
         db.session.commit()                                                                         # Commit changes to db
         flash('Your post has been created!', 'success')                                             # Display success message! For anyone wondering 'success' is just a bootstrap class, it gives a green-ish hue.
