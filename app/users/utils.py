@@ -4,7 +4,8 @@ from PIL import Image
 from flask import url_for, current_app                      # current_app will let us import the correct instance of app
 from flask_mail import Message
 from app import mail
-
+from app.models import User
+from app import db
 
 
 def save_picture(form_picture):
@@ -19,7 +20,7 @@ def save_picture(form_picture):
     
     i.save(picture_path)                                                                    # We are saving 'i' instead of form_picture locally, because of space efficiency. It would make no sense to save a 4k image only for it to be scaled down in CSS. Inefficient in db storage and load times!
     return picture_fn
-
+    
 
 
 
@@ -41,4 +42,17 @@ If you did not make this request then simply ignore this email and no changes wi
 '''
     mail.send(msg)                          # This is sending the message using mail.send()
 
+
+def blacklist(user):
+    user.blacklisted = True             # This sets the blacklisted boolean property in the DB to true ... 
+    db.session.commit()                 # commit changes into DB
+    
+def reputationUp(user):
+    user.reputation += 1                # Helper Function to increment A users reputation Score!
+    db.session.commit()                 # commit changes into DB
+
+def reputationDown(user):
+    user.reputation -= 1                # Helper Function to decrement A users reputation Score!
+    db.session.commit()                 # commit changes into DB
+# def promote_user():
 

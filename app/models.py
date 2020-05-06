@@ -21,7 +21,6 @@ class Groups(db.Model):
 
 '''
 
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)                                    # Primary Key
     username = db.Column(db.String(20), unique=True, nullable=False)                # Each User will have a username, with a max(20) characters, it must be unique, and Null is not allowed!
@@ -29,6 +28,12 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')    # Each User will have a defualt profile Image, so uniqueness does not apply, since Null is not allowed! 
     password = db.Column(db.String(60), nullable=False)                             # Each User will have passwords, with a max(60) characters, uniqueness does not apply, and Null is not allowed!
     posts = db.relationship('Post', backref='author', lazy=True)                    # This is linked to Posts, Lazy Evaluation is set to: True
+    
+    reputation = db.Column(db.Integer, nullable=False, default=10)                  # This has a default value of 10
+    chance = db.Column(db.Boolean, nullable=False, default=True)                    # This has a default value of True
+    blacklisted = db.Column(db.Boolean, unique=False, default=False)                # This has a default value of False
+    compliments=db.Column(db.Integer, unique=False, default=0)                      # This has a default value of 0
+
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
@@ -47,7 +52,23 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
-    
+
+
+class VIP(User):                                # This class inherits the User Class 
+    def vote_Super_User(self):
+        print("This is the election committee place your votes now!")
+        # This feature needs to be implemented ... 
+        #  INSERT YOUR CODE HERE
+
+
+
+class SuperUser(User):                          # This class inherits the User Class 
+    def SU_approve(self):
+        print("This needs to be implemented")
+        # This feature needs to be implemented ... 
+        #  INSERT YOUR CODE HERE
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)                                    # Primary Key
     title = db.Column(db.String(100), nullable=False)                               # Each Post will have a title, with a max(100) characters, uniqueness does not apply, and Null is not allowed!

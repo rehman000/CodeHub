@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Post
 from app.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm)
-from app.users.utils import save_picture, send_reset_email
+from app.users.utils import save_picture, send_reset_email, blacklist
 
 
 users = Blueprint('users', __name__)                            # Blueprints 
@@ -30,15 +30,34 @@ def register():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))                                               # Redirect to home page -- Prevent's already logged in user's from logging in again! 
+
     form = LoginForm()
+
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()                          # Look for user email in db, and stre it 
-        if user and bcrypt.check_password_hash(user.password, form.password.data):          # If the provided email exists AND Password Hash matches with user input from the form
-            login_user(user, remember=form.remember.data)                                   # login_user is part of flask_login, and like UserMixin it's really useful, it accepts two paramters, the user object, and the remember form data which is a boolean
-            next_page = request.args.get('next')                                            # using .get prevents us from getting a null pointer exception
-            return redirect(next_page) if next_page else redirect(url_for('main.home'))     # If the next page exists redirect to the next page, if it doesn't exist redirect to Home page
-        else:
-            flash('Login Unsuccessful. Please check username and password', 'danger')       # For anyone wondering 'danger' is just a bootstrap class, it gives a red-ish/pink-ish hue for an error message                           
+        user = User.query.filter_by(email=form.email.data).first()                              # Look for user email in db, and store it as user 
+
+        if user.blacklisted == True and user.chance == True:                                    # Basically what this does: IF the user is on the BL, but he/she has ONE last chance to do some final processing ... 
+            if user and bcrypt.check_password_hash(user.password, form.password.data):          # If the provided email exists AND Password Hash matches with user input from the form
+                login_user(user, remember=form.remember.data)                                   # The user is logged in for that session as normal! 
+                next_page = request.args.get('next')                                            
+                user.chance = False                                                             # We set this to False so that they can never log in AGAIN afterwards!!!! 
+                db.session.commit()                                                             # commit changes into DB
+                flash('This is your Last chance to do some final processing!', 'danger')        
+                return redirect(next_page) if next_page else redirect(url_for('main.home'))     # And redirected to the home page, ONE LAST TIME! 
+            else:
+                flash('Login Unsuccessful. Please check username and password', 'danger')
+
+        if user.blacklisted == True and user.chance == False:
+            flash('Login Unsuccessful. You have been black listed!', 'danger')                  # A black listed user with no chances can never log in again! 
+        
+        if user.blacklisted == False:
+            if user and bcrypt.check_password_hash(user.password, form.password.data):          # If the provided email exists AND Password Hash matches with user input from the form
+                login_user(user, remember=form.remember.data)                                   # login_user is part of flask_login, and like UserMixin it's really useful, it accepts two paramters, the user object, and the remember form data which is a boolean
+                next_page = request.args.get('next')                                            # using .get prevents us from getting a null pointer exception
+                return redirect(next_page) if next_page else redirect(url_for('main.home'))     # If the next page exists redirect to the next page, if it doesn't exist redirect to Home page
+            else:
+                flash('Login Unsuccessful. Please check username and password', 'danger')       # For anyone wondering 'danger' is just a bootstrap class, it gives a red-ish/pink-ish hue for an error message                          
+
     return render_template('login.html', title='Login', form=form)
 
 
@@ -118,3 +137,9 @@ def reset_token(token):
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
     
+@users.route("/bl/<string:username>")
+def bl(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    blacklist(user)
+    flash('User has been blacklisted! He will have one last chance to login, after that he will not be able to login ever again!', 'danger')
+    return redirect(url_for('main.home'))                                                   # Redirect to Home page
