@@ -1,10 +1,12 @@
 from flask import (render_template, url_for, flash, redirect, request, abort, Blueprint)
 from flask_login import current_user, login_required
 from app import db
-from app.models import Post
+from app.models import User, Post
 from app.posts.forms import PostForm
 from flask import Flask
 from flask_censor import Censor # This is based on profanity filter ... 
+from profanity_check import predict
+
 
 posts = Blueprint('posts', __name__)
 
@@ -12,7 +14,7 @@ posts = Blueprint('posts', __name__)
 
 censor = Censor()
 censor.set_censorchars('*')
-
+# censor.import_wordlist("app/posts/wordlist")          # The default configuration is much MUCH better at detecting profanity the wordslist makes it inaccurate! 
 
 
 @posts.route('/post/new', methods=['GET', 'POST'])
@@ -22,9 +24,30 @@ def new_post():
 
     if form.validate_on_submit():       # If user input is valid (i.e) no null characters, etc
 
-        title = censor.censor(form.title.data)
-        content = censor.censor(form.content.data)
+        title_check = predict([form.title.data])
+        content_check = predict([form.content.data])
 
+        if (title_check[0] == 1 or content_check[0] == 1) and (current_user.profanity == False):
+            title = censor.censor(form.title.data)          # Feature # 11: Profanity Filter ... 
+            content = censor.censor(form.content.data)
+            post = Post(title=title, content=content, author=current_user)          # Create instance of Post() and pass in user input given to the form
+            current_user.reputation -= 1
+            current_user.profanity = True
+            db.session.commit()
+            flash('Warning! Profanity detected! Since this is your first offense, Your reputation score has been reduced by 1. Any subsequent offense will reduce your reputation score by 5!', 'warning')
+            return redirect(url_for('main.home'))                                                       # Redirect to Home page    
+
+        if (title_check[0] == 1 or content_check[0] == 1) and (current_user.profanity == True):
+            title = censor.censor(form.title.data)          # Feature # 11: Profanity Filter ... 
+            content = censor.censor(form.content.data)
+            post = Post(title=title, content=content, author=current_user)          # Create instance of Post() and pass in user input given to the form
+            current_user.reputation -= 5
+            db.session.commit()
+            flash('Warning! Profanity detected! Your reputation score has been reduced by 5. You were warned!', 'danger') 
+            return redirect(url_for('main.home'))                                                       # Redirect to Home page
+        
+        title = censor.censor(form.title.data)          # Feature # 11: Profanity Filter ... 
+        content = censor.censor(form.content.data)
         post = Post(title=title, content=content, author=current_user)          # Create instance of Post() and pass in user input given to the form
         db.session.add(post)                                                                        # Mark this 'post' to be added to the database
         db.session.commit()                                                                         # Commit changes to db

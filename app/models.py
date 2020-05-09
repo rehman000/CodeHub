@@ -28,8 +28,9 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')    # Each User will have a defualt profile Image, so uniqueness does not apply, since Null is not allowed! 
     password = db.Column(db.String(60), nullable=False)                             # Each User will have passwords, with a max(60) characters, uniqueness does not apply, and Null is not allowed!
     posts = db.relationship('Post', backref='author', lazy=True)                    # This is linked to Posts, Lazy Evaluation is set to: True
-    
+
     reputation = db.Column(db.Integer, nullable=False, default=10)                  # This has a default value of 10
+    profanity = db.Column(db.Boolean, unique=False, default=False)                  # This had a default value of 0
     chance = db.Column(db.Boolean, nullable=False, default=True)                    # This has a default value of True
     blacklisted = db.Column(db.Boolean, unique=False, default=False)                # This has a default value of False
     compliments=db.Column(db.Integer, unique=False, default=0)                      # This has a default value of 0
@@ -54,28 +55,13 @@ class User(db.Model, UserMixin):
 
 
 
-class VIP(User):                                # This class inherits the User Class 
-    def vote_Super_User(self):
-        print("This is the election committee place your votes now!")
-        # This feature needs to be implemented ... 
-        #  INSERT YOUR CODE HERE
-
-
-
-class SuperUser(User):                          # This class inherits the User Class 
-    def SU_approve(self):
-        print("This needs to be implemented")
-        # This feature needs to be implemented ... 
-        #  INSERT YOUR CODE HERE
-
-
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)                                    # Primary Key
     title = db.Column(db.String(100), nullable=False)                               # Each Post will have a title, with a max(100) characters, uniqueness does not apply, and Null is not allowed!
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)   # Each Post will have a date_posted, with DateTime set to utcnow, current time, and Null is not allowed!
     content = db.Column(db.Text, nullable=False)                                    # Each Post will have a content with no character limit, and Null is not allowed!
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)       # This is using the user id as a ForeignKey, each post must have an Author, so Null is not allowed!
-
+    rating = db.Column(db.Integer, nullable=False, default=10)
 
     def __repr__(self):
         return f"Post('{self.title}','{self.date_posted}')"

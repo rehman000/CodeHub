@@ -1,26 +1,13 @@
-from flask import Flask
-from flask_censor import Censor # This is based on profanity filter ... 
+from profanity_check import predict, predict_prob
 
-'''
-from profanity_filter import ProfanityFilter
+predict(['predict() takes an array and returns a 1 for each string if it is offensive, else 0.'])
+# [0]
 
-pf = ProfanityFilter()
+predict(['fuck you'])
+# [1]
 
+is_post_profane = predict(['fuck you'])
 
-pf.censor("That's bullshit!")
-# "That's ********!"
+print(is_post_profane)
 
-pf.censor_word('fuck')
-# Word(uncensored='fuck', censored='****', original_profane_word='fuck')
-'''
-
-censor = Censor()
-censor.set_censorchars('*')
-
-User_string = str ( input() )
-
-
-
-censored_string = censor.censor(User_string)
-
-print(censored_string)
+print(is_post_profane[0])
