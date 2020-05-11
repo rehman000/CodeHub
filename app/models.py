@@ -61,7 +61,7 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)   # Each Post will have a date_posted, with DateTime set to utcnow, current time, and Null is not allowed!
     content = db.Column(db.Text, nullable=False)                                    # Each Post will have a content with no character limit, and Null is not allowed!
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)       # This is using the user id as a ForeignKey, each post must have an Author, so Null is not allowed!
-    rating = db.Column(db.Integer, nullable=False, default=10)
+    rating = db.Column(db.Integer, nullable=False, default=0)
 
     def __repr__(self):
         return f"Post('{self.title}','{self.date_posted}')"

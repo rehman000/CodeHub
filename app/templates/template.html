@@ -70,7 +70,15 @@
                     <h3>Our Sidebar</h3>
                     <p class='text-muted'>You can put any information here you'd like.
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">Latest Posts</li>
+                            {% if current_user.is_authenticated %}
+                                {% if current_user.reputation >= 0 %}
+                                    <li class="list-group-item list-group-item">Reputation Score: {{ current_user.reputation }}</li>
+                                {% else %}
+                                    <li class="list-group-item list-group-item" style="color: red;">Reputation Score: {{ current_user.reputation }}</li>
+                                {% endif %}
+                            {% else %}
+                                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                            {% endif %}
                             <li class="list-group-item list-group-item-light">Announcements</li>
                             <li class="list-group-item list-group-item-light">Calendars</li>
                             <li class="list-group-item list-group-item-light">etc</li>
