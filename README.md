@@ -64,21 +64,44 @@ Okay listen up team! Read these instructions very carefully:
 
 ```
 
+# Recommended Text Editor: 
+- Microsoft <a href="https://code.visualstudio.com/download">VSCode</a>
+
+Once you have VSCode installed and running, with the cloned repository folder open. 
+
+To open a terminal press <b>(ctrl + ~)</b> (tilda it's below the esc key). 
+
+### The recommended Terminal is either: 
+- <a href="https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab"> WSL Ubuntu </a> -- bash
+- Ubuntu Terminal Extension for VSCode. 
+
+To install the Ubuntu Terminal extension for VSCode: press <b>(ctrl + shift + x)</b> to get the extension store, and then search for Ubuntu, and click the green install button when prompted. 
+
+An issue with Ubuntu terminal is that you can't set this terminal as a default terminal VScode at the moment, the only way to open this terminal and create more instances of it is to press <b>(ctrl + alt + u)</b>.
+
 # Development Enviornment Set up:
 To clone this repository enter the following command: 
 
     $ git clone https://github.com/rehman000/CodeHub/
 
 #### Information about the environment variables
+The following enviornmental variables are located in: <b>CodeHub/app/config.py</b>
+
 * SQLALCHEMY_DATABASE_URI represents the url to an SQL database
 * SECRET_KEY represents your secret key
 * MAIL_USERNAME represents an email address
 * MAIL_PASSWORD represents an email password
 
+
+
 # Installing Dependencies: 
 
     $ pip3 install -r requirements.txt
     
+Note if you get any error stating no module named "module name", you just need to install that dependency:
+
+    $ pip3 install "module name"
+
 # Running the Application:
 
 Now that we have everything set up properly to run the application enter the following command:
