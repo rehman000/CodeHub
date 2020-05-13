@@ -92,7 +92,24 @@ The following enviornmental variables are located in: <b>CodeHub/app/config.py</
 * MAIL_USERNAME represents an email address
 * MAIL_PASSWORD represents an email password
 
+<img src="Config.png" >
 
+For testing purposes you can insert the following: 
+
+```
+export SECRET_KEY="Todd_Howard_Strikes_Again"
+export SQLALCHEMY_DATABASE_URI="sqlite:///database.db"
+export MAIL_USERNAME="dummyEmail@gmail.com"
+export MAIL_PASSWORD="dummyPassword"
+```
+
+But you will need to provide your <b>actual email address</b>, and an <b>actual password</b>, for convenience you can insert this on to the bottom of the .bash_profile file in WSL/Ubuntu, and then run the following command:  
+
+        $ source .bash_profile
+
+so that these changes take effect. Now that the enviornment variables have been set, all that's left is to install all the dependencies, and run the application. 
+
+If that seems to complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information that will be available in the git log for this public repository. 
 
 # Installing Dependencies: 
 
