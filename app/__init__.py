@@ -6,7 +6,11 @@ from flask_mail import Mail
 from app.config import Config                       # This is the same as before but we migrated all the app.config calls into the config file.
                                                     # This allows us to create a multiple configs for dev, deploy, fallback, production 
 from flask_censor import Censor
+from flask_marshmallow import Marshmallow
+from marshmallow_sqlalchemy import ModelSchema
 
+app = Flask(__name__) 
+ma = Marshmallow(app)
 db = SQLAlchemy()                                   # This initilizes SQLAlchemy!
 bcrypt = Bcrypt()                                   # This initializes bcrypt!
 login_manager = LoginManager()                      # This initializes LoginManager!

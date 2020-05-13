@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- BootStrap CSS: -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- Custom CSS: -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+    <!-- Title -->
+    <title>Welcome to CodeHub</title>
+
+    {% block head %}
+    {% endblock head %}
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <div class="container">
+                <a class="navbar-brand mr-4" href="/">CodeHub</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Home</a>
+                        <a class="nav-item nav-link" href="{{ url_for('main.projects') }}">Projects</a>
+                        <a class="nav-item nav-link" href="{{ url_for('main.users') }}">Users</a>
+                        <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
+                    </div>
+                    <div class="navbar-nav">
+                        {% if current_user.is_authenticated %}
+                            <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">New Post</a>
+                            <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a> 
+                            <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Log out</a>                      
+                        {% else %}
+                            <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
+                            <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        <img class="logo" src="../static/codehub2.png" alt="CodeHub Logo">
+        <style>
+            .logo {
+                margin: 10px auto 20px;
+                display: block;
+                height: 300px;
+                width: 300px;
+            }
+        </style>
+        <div class="row">
+            <div class="column">
+                <h2>Top Projects</h2>
+                <ol>
+                    <li><strong>SAVE THE WORLD</strong></li>
+                    <li><strong>Computer Organization Group</strong></li>
+                    <li><strong>Steam Gamerz</strong></li>
+                </ol>
+            </div>
+            <div class="column">
+                <h2>Top Users</h2>
+                <ol>
+                    <li><strong>Todd Howard</strong></li>
+                    <li><strong>Gabe Newell</strong></li>
+                    <li><strong>Izidor Gertner</strong></li>
+                </ol>
+            </div>
+            <style>
+                .column {
+                    float: left;
+                    width: 50%;
+                }
+                .row:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+            </style>
+        </div>
+    </main>
+
