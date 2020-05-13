@@ -90,7 +90,7 @@ To clone this repository enter the following command:
 
     $ git clone https://github.com/rehman000/CodeHub/
 
-### Information about the environment variables
+### Information about the environment variables:
 The following enviornmental variables are located in: <b>CodeHub/app/config.py</b>
 
 * SQLALCHEMY_DATABASE_URI represents the url to an SQL database
@@ -100,7 +100,7 @@ The following enviornmental variables are located in: <b>CodeHub/app/config.py</
 
 <img src="documentation/Config.png" >
 
-For testing purposes you can insert the following: 
+### For testing purposes you can insert the following: 
 
 ```
 export SECRET_KEY="Todd_Howard_Strikes_Again"
@@ -119,13 +119,13 @@ so that these changes take effect. Now that the enviornment variables have been 
 
 ### These enviornmental variables are neccessary for creating the database, and for the password reset functionality:
 
-This is using gmail's smtp protocol:
+## This is using gmail's smtp protocol:
 
 <img src="documentation/Password_Reset.jpg">
 
-### Evidence that it actually works!
+## Evidence that it actually works!
 
-
+<img src="documentation/Password_Reset.gif">
 
 ### To make sure this works enable this feature in your google account: 
 - https://myaccount.google.com/lesssecureapps
