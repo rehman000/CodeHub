@@ -123,7 +123,7 @@ so that these changes take effect. Now that the enviornment variables have been 
 
 <img src="documentation/Password_Reset.jpg">
 
-## Evidence that it actually works!
+## Evidence that it actually works:
 
 <img src="documentation/Password_Reset.gif">
 
