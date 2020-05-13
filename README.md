@@ -115,7 +115,7 @@ But you will need to provide your <b>actual Gmail email address</b>, and an <b>a
 
 so that these changes take effect. Now that the enviornment variables have been set, all that's left is to install all the dependencies, and run the application. 
 
-- If that seems too complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information <b>(such as your email address and password)</b> that will be available as <b>plain text</b> in the git log for this <b>public</b> repository. 
+- If that seems too complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information <b>(such as your email address and password)</b> that will be available as <b>plain text</b> in the git history for this <b>public</b> repository. 
 
 ### These enviornmental variables are neccessary for creating the database, and for the password reset functionality:
 
