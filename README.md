@@ -117,7 +117,7 @@ so that these changes take effect. Now that the enviornment variables have been 
 
 - If that seems too complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information <b>(such as your email address and password)</b> that will be available as <b>plain text</b> in the git log for this <b>public</b> repository. 
 
-#### These enviornmental variables are neccessary for creating the database, and for the password reset functionality:
+### These enviornmental variables are neccessary for creating the database, and for the password reset functionality:
 
 <img src="Password_Reset.jpg">
 
