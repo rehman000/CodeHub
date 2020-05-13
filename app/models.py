@@ -1,9 +1,10 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer              # For email Reset JSON token! 
 from flask import current_app                                                       # I need to import this instead of app, because app is now in create_app(), so it's out of scope!
-from app import db, login_manager                                                   # Resolves issue with circular imports! Login manager is a flask-extension
+from app import db, login_manager, ma                                             # Resolves issue with circular imports! Login manager is a flask-extension
 from flask_login import UserMixin                                                   # Really useful extension for authentication, and session management, accepts user_id 
-
+from flask_marshmallow import Marshmallow
+from marshmallow_sqlalchemy import ModelSchema
 
 @login_manager.user_loader 
 def laod_user(user_id):
@@ -20,6 +21,62 @@ class Groups(db.Model):
     status = relationship('Post', backref='author', lazy=True) # This has to be many to many relationship! 
 
 '''
+
+# START of Groups changes
+
+# Creates Groups table in db
+class Groups(db.Model):
+    group_id = db.Column(db.Integer, primary_key=True)
+    group_name = db.Column(db.String(20), nullable=False)
+    group_desc = db.Column(db.Text, nullable=False)
+    visible_posts = db.Column(db.Boolean, nullable=False)
+    visible_members = db.Column(db.Boolean, nullable=False)
+    visible_eval = db.Column(db.Boolean, nullable=False)
+    visible_warn = db.Column(db.Boolean, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f"Groups('{self.group_id}')"
+
+
+class GroupMembers(db.Model):
+    group_id = db.Column(db.Integer, db.ForeignKey(
+        'groups.group_id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete="CASCADE"), primary_key=True)
+
+    def __repr__(self):
+        return f"GroupMembers('{self.group_id}')"
+
+class GroupSchema(ma.SQLAlchemySchema):
+    class Meta:
+        fields = ('group_id', 'group_name', 'group_desc',
+                  'visible_posts', 'visible_members', 'visible_eval', 'visible_warn', 'rating')
+
+class GroupMemSchema(ma.SQLAlchemySchema):
+    class Meta:
+        fields = ('group_id', 'user_id')
+
+
+# Added poll features in here for convenience
+class Poll(db.Model):
+    poll_id = db.Column(db.Integer, primary_key=True)
+    desc = db.Column(db.String(100), nullable=False)
+    group_id = db.Column(db.Integer, db.ForeignKey(
+        'groups.group_id'), nullable=False)
+    
+    def __repr__(self):
+        return f"Poll('{self.desc}', '{self.group_id}')"
+        
+class PollOptions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    option = db.Column(db.String(100), nullable=False)
+    poll_id = db.Column(db.Integer, db.ForeignKey(
+        'poll.poll_id'), nullable=False)
+    votes = db.Column(db.Integer, nullable=True)
+    
+    def __repr__(self):
+        return f"PollOptions('{self.option}', '{self.poll_id}', '{self.votes}')"
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)                                    # Primary Key
