@@ -119,7 +119,13 @@ so that these changes take effect. Now that the enviornment variables have been 
 
 ### These enviornmental variables are neccessary for creating the database, and for the password reset functionality:
 
+This is using gmail's smtp protocol:
+
 <img src="Password_Reset.jpg">
+
+### Evidence that it actually works!
+
+
 
 ### To make sure this works enable this feature in your google account: 
 - https://myaccount.google.com/lesssecureapps
