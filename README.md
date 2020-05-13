@@ -90,7 +90,7 @@ To clone this repository enter the following command:
 
     $ git clone https://github.com/rehman000/CodeHub/
 
-#### Information about the environment variables
+### Information about the environment variables
 The following enviornmental variables are located in: <b>CodeHub/app/config.py</b>
 
 * SQLALCHEMY_DATABASE_URI represents the url to an SQL database
@@ -116,6 +116,10 @@ But you will need to provide your <b>actual email address</b>, and an <b>actual 
 so that these changes take effect. Now that the enviornment variables have been set, all that's left is to install all the dependencies, and run the application. 
 
 - If that seems too complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information <b>(such as your email address and password)</b> that will be available as <b>plain text</b> in the git log for this <b>public</b> repository. 
+
+#### These enviornmental variables are neccessary for creating the database, and for the password reset functionality:
+
+<img src="Password_Reset.jpg">
 
 # Installing Dependencies: 
 
