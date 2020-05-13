@@ -98,7 +98,7 @@ The following enviornmental variables are located in: <b>CodeHub/app/config.py</
 * MAIL_USERNAME represents an email address
 * MAIL_PASSWORD represents an email password
 
-<img src="Config.png" >
+<img src="documentation/Config.png" >
 
 For testing purposes you can insert the following: 
 
@@ -121,7 +121,7 @@ so that these changes take effect. Now that the enviornment variables have been 
 
 This is using gmail's smtp protocol:
 
-<img src="Password_Reset.jpg">
+<img src="documentation/Password_Reset.jpg">
 
 ### Evidence that it actually works!
 
