@@ -151,7 +151,7 @@ The application will be running on:     http://localhost:5000/
 
 <hr></hr>
 
-- <a href="Phase I Report.pdf">Phase I Report.pdf</a>
-- <a href="Phase II_ Design Report.pdf">Phase II Report.pdf</a>
+- <a href="documentation/Phase I Report.pdf">Phase I Report.pdf</a>
+- <a href="documentation/Phase II_ Design Report.pdf">Phase II Report.pdf</a>
 
 <hr></hr>
