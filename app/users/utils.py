@@ -56,7 +56,7 @@ def reputationDown(user):
     db.session.commit()                 # commit changes into DB
 
 def set_reputation(user):
-    user.reputation = -12               # Make the reputation Negative so that I can test feature # 6 from the spec sheet!
+    user.reputation -= 1                # reduce by 1
     db.session.commit()                 # commit changes into DB
 
 # def promote_user():

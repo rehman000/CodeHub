@@ -75,12 +75,34 @@ def update_post(post_id):
     form = PostForm()                                                       # Create an instance of the PostForm()
     
     if form.validate_on_submit():                                           # If the input is valid
+        
+        title_check = predict([form.title.data])
+        content_check = predict([form.content.data])
+
+        if (title_check[0] == 1 or content_check[0] == 1) and (current_user.profanity == False):
+            post.title =  censor.censor(form.title.data)                    # The form title overwrites the post title
+            post.content = censor.censor(form.content.data)
+            current_user.reputation -= 1                                    # reputation score decremented by 1
+            current_user.profanity = True                                   
+            db.session.commit()
+            flash('Warning! Profanity detected! Since this is your first offense, Your reputation score has been reduced by 1. Any subsequent offense will reduce your reputation score by 5!', 'warning') 
+            return redirect(url_for('posts.post', post_id=post.id))
+
+        if (title_check[0] == 1 or content_check[0] == 1) and (current_user.profanity == True):
+            post.title = censor.censor(form.title.data)                     # The form title overwrites the post title
+            post.content = censor.censor(form.content.data)                 # The form content overwrites the post content
+            current_user.reputation -= 5                                    # reputation score decremented by 5
+            db.session.commit()    
+            flash('Warning! Profanity detected! Your reputation score has been reduced by 5. You were warned!', 'danger')
+            return redirect(url_for('posts.post', post_id=post.id))
+        
+        # When there is no profanity: 
         post.title = form.title.data                                        # The form title overwrites the post title
         post.content = form.content.data                                    # The form content overwrites the post content
-        db.session.commit()                                                 # Commit changes to db! 
-                                                                            # We do not need to add anything into the db, these objects are already in the db and being overwritten!
+        db.session.commit()                                                 # Commit changes to db!                                                                             # We do not need to add anything into the db, these objects are already in the db and being overwritten!
         flash('Your post has been successfully updated!', 'success')        # Display success message. For anyone wondering 'success' is a bootstrap class it gives a green-ish hue.
         return redirect(url_for('posts.post', post_id=post.id))             # Redirect to the post/id page
+    
     if request.method == 'GET':
         form.title.data = post.title                                        # This ensures that the fields are populated with the previous text! But only if it's a 'GET' request.
         form.content.data = post.content                                    # This ensures that the fields are populated with the previous text! But only if it's a 'GET' request.

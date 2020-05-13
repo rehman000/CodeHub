@@ -71,10 +71,16 @@
                     <p class='text-muted'>You can put any information here you'd like.
                         <ul class="list-group">
                             {% if current_user.is_authenticated %}
-                                {% if current_user.reputation >= 0 %}
+                                {% if current_user.reputation >= 3 %}
                                     <li class="list-group-item list-group-item">Reputation Score: {{ current_user.reputation }}</li>
-                                {% else %}
+                                {% elif current_user.reputation == 2 %}
+                                    <li class="list-group-item list-group-item" style="color: orange;">Reputation Score: {{ current_user.reputation }}</li>
+                                {% elif current_user.reputation == 1 %}
+                                    <li class="list-group-item list-group-item" style="color: orangered;">Reputation Score: {{ current_user.reputation }}</li>
+                                {% elif current_user.reputation == 0 %}
                                     <li class="list-group-item list-group-item" style="color: red;">Reputation Score: {{ current_user.reputation }}</li>
+                                {% else %}
+                                    <li class="list-group-item list-group-item" style="color: red;"><b>Reputation Score: {{ current_user.reputation }}</b></li>
                                 {% endif %}
                             {% else %}
                                 <li class="list-group-item list-group-item-light">Latest Posts</li>

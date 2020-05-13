@@ -148,8 +148,9 @@ def bl(username):
     return redirect(url_for('main.home'))                                                   # Redirect to Home page
 
 @users.route('/user/test/<string:username>') 
+@login_required
 def test(username):
     user = User.query.filter_by(username=username).first_or_404()
     set_reputation(user)
-    flash('Your reputation has become negative! You are in a lot of trouble ... !', 'danger')
+    flash('Your reputation has decreased by 1', 'danger')
     return redirect(url_for('main.home'))                                                   # Redirect to Home page

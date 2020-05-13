@@ -14,7 +14,7 @@ def home():                                                                     
                                                                                                                     # By using .query.order_by(Post.date_posted.desc())  I am able to show posts in a descending order of creation.
                                                                                                                     # Translation: The newer posts will be seen on the top, while the older posts will sink to the bottom and eventually to other paginated pages! 
     # is_shown = False
-    if (current_user.is_authenticated and current_user.reputation < 0):         # Feature # 6: From the Spec Sheet! 
+    if (current_user.is_authenticated and current_user.blacklisted == False and current_user.reputation < 0):        # Feature # 6: From the Spec Sheet! 
         flash('Your reputation became negative! You are being black listed!', 'danger')
         blacklist(current_user)
 
