@@ -109,7 +109,7 @@ export MAIL_USERNAME="dummyEmail@gmail.com"
 export MAIL_PASSWORD="dummyPassword"
 ```
 
-But you will need to provide your <b>actual email address</b>, and an <b>actual password</b>, for convenience you can insert this on to the bottom of the .bash_profile file in WSL/Ubuntu, and then run the following command:  
+But you will need to provide your <b>actual Gmail email address</b>, and an <b>actual Gmail password</b>, for convenience you can insert this on to the bottom of the .bash_profile file in WSL/Ubuntu, and then run the following command:  
 
         $ source .bash_profile
 
@@ -121,6 +121,10 @@ so that these changes take effect. Now that the enviornment variables have been 
 
 <img src="Password_Reset.jpg">
 
+### To make sure this works enable this feature in your google account: 
+- https://myaccount.google.com/lesssecureapps
+
+This allows your account to send automated emails with the password reset link! 
 # Installing Dependencies: 
 
     $ pip3 install -r requirements.txt
