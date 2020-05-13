@@ -21,6 +21,27 @@ def home():                                                                     
     return render_template('home.html', posts=posts) 
 
 
+@main.route('/welcome')
+def welcome():
+    return render_template('welcome.html', title='Welcome')
+
 @main.route('/about')
 def about():
     return render_template('about.html', title='About us')
+
+
+@main.route('/projects')
+def projects():
+    return render_template('projects.html', title='Projects')
+
+
+@main.route('/users')
+def users():
+    return render_template('users.html', title='Users')
+
+@main.route('/groups')
+def groups():
+    return render_template('groups.html', title='Groups')
+    
+    
+    
