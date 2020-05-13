@@ -3,6 +3,12 @@
 # CSC-32200-Software-Engineering
 CSC-32200-Software-Engineering Spring 2020 @ The City College of New York 
 
+### Team O:
+- Rehman Arshad <b>(RECEIVE ALL BONUS POINTS)</b>
+- Jorge Quiroz
+- Moshe Oppenheim 
+- Neel
+
 Okay listen up team! Read these instructions very carefully:
 
 # The file Structure for CodeHub is as follows:
