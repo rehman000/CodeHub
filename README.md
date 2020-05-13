@@ -109,7 +109,7 @@ But you will need to provide your <b>actual email address</b>, and an <b>actual 
 
 so that these changes take effect. Now that the enviornment variables have been set, all that's left is to install all the dependencies, and run the application. 
 
-If that seems to complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information that will be available in the git log for this public repository. 
+- If that seems too complicated or confusing for testing purposes you can insert these values directly into config.py, However <b>DO NOT COMMIT</b> these changes, they have private information <b>(such as your email address and password)</b> that will be available as <b>plain text</b> in the git log for this <b>public</b> repository. 
 
 # Installing Dependencies: 
 
