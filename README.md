@@ -132,3 +132,12 @@ Now that we have everything set up properly to run the application enter the fol
     $ python3 run.py
 
 The application will be running on:     http://localhost:5000/ 
+
+# Documentation: 
+
+<hr></hr>
+
+- <a href="Phase I Report.pdf">Phase I Report.pdf</a>
+- <a href="Phase I Report.pdf">Phase II Report.pdf</a>
+
+<hr></hr>
